@@ -1,0 +1,5 @@
+﻿  stdafx.cpp
+  chessDlg.cpp
+  chess.cpp
+  正在生成代码...
+LINK : fatal error LNK1104: 无法打开文件“C:\Users\win10\Desktop\毕设啊啊啊\毕设象棋C++\Base\Base017R1-0\Debug\chess_lib.lib”
