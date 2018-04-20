@@ -1,12 +1,12 @@
-#include "chessbase.h"
+#include "chessbase.h"																//包含头文件
 
-vector<Matrix> ChessBase::legalposition_;
+vector<Matrix> ChessBase::legalposition_;											//合法位置
 
-const IdType ChessBase::m_bigKingId = 32;
+const IdType ChessBase::m_bigKingId = 32;											//将黑方ID赋32  红方将赋16
 
 const IdType ChessBase::m_smallKingId = 16;
 
-int ChessBase::chessmanvalue_[48]=
+int ChessBase::chessmanvalue_[48]=													//棋子价值数组
 {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,//0-15
 	30,20,20,20,20,40,40,90,90,45,45,10,10,10,10,10,//16-31
@@ -14,7 +14,7 @@ int ChessBase::chessmanvalue_[48]=
 };
 ChessBase::ChessBase(int sidetag,int value,const Position& newlocation)
   :sidetag_(sidetag),value_(value),location_(newlocation),alive_(true) {
-	//大号棋子1,小号棋子0
+																					//大号棋子1,小号棋子0
 }
 
 ChessBase::~ChessBase(void)
@@ -32,7 +32,8 @@ IdType ChessBase::GetSelfKing(void) const
 {
 	return	sidetag_ == 1 ? m_bigKingId : m_smallKingId;
 }
-// 供派生类构造函数使用，实现位置价值数组的初始化
+
+//下面是供派生类构造函数使用，实现位置价值数组的初始化
 void ChessBase::InitMatrix(int* begin)
 {
 	//positionvalue_.reserve(256);

@@ -1,40 +1,40 @@
-#pragma once
+#pragma once																													//	防止重复引用头文件机制，
 
 #ifdef CHESS_LIB_EXPORTS  
-#define CHESS_LIB_API __declspec(dllexport)   
+#define CHESS_LIB_API __declspec(dllexport)																						//采用这种方法export DLL中的类
 #else  
 #define CHESS_LIB_API __declspec(dllimport)   
 #endif 
 
-#include "global.h"
+#include "global.h"                      //包含global头文件
 
-class CHESS_LIB_API ChessBase
+class CHESS_LIB_API ChessBase            //ChessBase类：棋子基类主要提供获取走法和走棋两个接口
 {
  public:
 	
-	ChessBase(int sidetag,int value,const Position& newlocation);																///<	用于构造一个棋子的基类部分
-	virtual ~ChessBase(void);																									///<	基类虚析构函数
-	virtual void GetMove(const Matrix& _chessboard, moves& tem) const=0;														///<	得到棋子走法，属性不得修改
-	virtual void GetValue(const Matrix& _chessboard, Flex& flex) const=0;														///<	得到棋子的价值
-	virtual bool KillKing(const Matrix& _chessboard, const Position& positionofking) const=0;									///<	胜利的判定
+	ChessBase(int sidetag,int value,const Position& newlocation);																//	用于构造一个棋子的基类部分
+	virtual ~ChessBase(void);																									//	基类虚析构函数，当一个类被用来作为基类的时候，把析构函数写成虚函数。
+	virtual void GetMove(const Matrix& _chessboard, moves& tem) const=0;														//	得到棋子走法，属性不得修改
+	virtual void GetValue(const Matrix& _chessboard, Flex& flex) const=0;														//	得到棋子的价值
+	virtual bool KillKing(const Matrix& _chessboard, const Position& positionofking) const=0;									//	胜利的判定
 	//	一个棋子贡献的价值 = 位置价值+棋子本身的价值
-	inline int ContributeValue(void) const { return positionvalue_[location_.first][location_.second]+value_;}					///<	inline内联函数
+	inline int ContributeValue(void) const { return positionvalue_[location_.first][location_.second]+value_;}					//	inline内联函数
 	//	返回棋子所属的
 	inline int sidetag(void) const {return sidetag_;}
-	inline bool IsBigMan(void) const { return sidetag_ == 1 ? true : false; }													///<	是否是大号棋子的判定
-	inline Position& location(void) {return location_;}																			///<	返回棋子在棋盘上的位置
-	inline void set_location(const Position& newlocat) {this->location_=newlocat;}												///<	设定棋子在棋盘上的位置
-	inline int value(void) const { return value_;}																				///<	
-	inline bool Alive(void) {return alive_;}																					///<	判断棋子是否还在
-	inline void SetAlive(bool a) {alive_=a;}																					///<	
-	IdType GetSelfKing(void) const;																								///<
+	inline bool IsBigMan(void) const { return sidetag_ == 1 ? true : false; }													//	是否是大号棋子的判定
+	inline Position& location(void) {return location_;}																			//	返回棋子在棋盘上的位置
+	inline void set_location(const Position& newlocat) {this->location_=newlocat;}												//	设定棋子在棋盘上的位置
+	inline int value(void) const { return value_;}																				//	
+	inline bool Alive(void) {return alive_;}																					//	判断棋子是否还在
+	inline void SetAlive(bool a) {alive_=a;}																					//	
+	IdType GetSelfKing(void) const;																								//
 
 public:
-	static void InitLegalPosition(void);																						///<	static函数
+	static void InitLegalPosition(void);																						//	static函数
 
 private:
-	ChessBase(const ChessBase&);																								///<	拷贝构造
-	ChessBase& operator=(const ChessBase&);																						///<	重载赋值运算符
+	ChessBase(const ChessBase&);																								//	拷贝构造
+	ChessBase& operator=(const ChessBase&);																						//	重载赋值运算符
 
 protected:
 	
